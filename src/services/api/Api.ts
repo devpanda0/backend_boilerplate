@@ -83,7 +83,6 @@ export default class Api {
 		})
 
 		// https://github.com/fastify/fastify-static
-		console.log(__dirname)
 		this.fastify.register(fastifyStatic, {
 			root: path.join(__dirname, '/public'),
 			prefix: staticPrefix,
