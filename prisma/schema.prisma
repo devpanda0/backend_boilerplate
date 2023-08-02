@@ -11,8 +11,9 @@ datasource db {
 model Settings {
   id Int @id @default(autoincrement())
 
-  apiPort   Int    @default(3000)
-  apiDomain String @default("http://localhost")
+  apiAutoStart Boolean @default(true)
+  apiPort      Int     @default(3000)
+  apiDomain    String  @default("http://localhost")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
