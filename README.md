@@ -47,3 +47,7 @@ There is a config service that is managed from the database, so see `schema.pris
 ```env
 DATABASE_URL=postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public
 ```
+
+## TODOs
+- [ ] Add Event System
+- [ ] Add Custom Logger
