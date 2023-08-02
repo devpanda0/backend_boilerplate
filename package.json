@@ -10,7 +10,11 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:pull": "prisma db pull",
+    "prisma:seed": "prisma db seed",
     "prisma:studio": "prisma studio"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "author": "DevPanda (Florian Richter)",
   "license": "MIT",

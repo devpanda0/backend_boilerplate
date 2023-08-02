@@ -40,6 +40,7 @@ There is a config service that is managed from the database, so see `schema.pris
 - `prisma:generate`: Generate the prisma client.
 - `prisma:push`: Push the prisma schema to the database.
 - `prisma:pull`: Pull the prisma schema from the database.
+- `prisma:seed`: Seed the database. IT OVERRIDE ALL SETTINGS!
 - `prisma:studio`: Open the prisma studio.
 
 ## .env

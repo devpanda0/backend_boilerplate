@@ -8,6 +8,7 @@ import fastifyStatic from "@fastify/static";
 import fastifyMetrics from "fastify-metrics";
 import fastifyQs from "fastify-qs";
 import * as path from "path";
+import ConfigService from "../../utils/Config";
 
 export default class Api {
 	static _instance: Api
@@ -34,9 +35,10 @@ export default class Api {
 	}
 
 	async start(): Promise<void> {
-		await this.registerPlugins()
+		const config = ConfigService.getInstance().config!
+		await this.registerPlugins(config.apiStaticPrefix, config.apiMetricsPath)
 
-		this.fastify.listen({ port: 3000 }, (err, address) => {
+		this.fastify.listen({ port: config.apiPort }, (err, address) => {
 			if (err) {
 				this.fastify.log.error(err)
 				process.exit(1)
@@ -48,7 +50,7 @@ export default class Api {
 		await this.fastify.close()
 	}
 
-	async registerPlugins(): Promise<void> {
+	async registerPlugins(staticPrefix: string, metricsPath: string): Promise<void> {
 		this.fastify.register(fastifyAutoload, {
 			dir: __dirname + '/routes',
 		})
@@ -84,7 +86,7 @@ export default class Api {
 		console.log(__dirname)
 		this.fastify.register(fastifyStatic, {
 			root: path.join(__dirname, '/public'),
-			prefix: '/public/',
+			prefix: staticPrefix,
 			constraints: { host: 'example.com' }
 		})
 
@@ -97,7 +99,7 @@ export default class Api {
 
 		// https://gitlab.com/m03geek/fastify-metrics
 		this.fastify.register(fastifyMetrics, {
-			endpoint: '/metrics',
+			endpoint: metricsPath,
 		})
 
 		// https://www.npmjs.com/package/fastify-qs
